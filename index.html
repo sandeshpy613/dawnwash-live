@@ -11,748 +11,202 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- Design Refresh & Globals --- */
+        /* --- Enhanced Design --- */
         :root {
-            --primary-color: #005c97;
-            /* Darker, richer blue */
-            --primary-hover: #004a7c;
-            --secondary-color: #f4f7f6;
-            /* Lighter, cleaner background */
-            --card-bg: #ffffff;
-            --text-dark: #2c3e50;
-            /* Softer dark text */
-            --text-light: #ffffff;
-            --text-muted: #7f8c8d;
-            --border-color: #e0e6ed;
-            --success-color: #27ae60;
-            --pending-color: #f39c12;
-            --shadow: 0 5px 15px rgba(44, 62, 80, 0.07);
-            --shadow-hover: 0 8px 25px rgba(44, 62, 80, 0.1);
+            --primary-color: #0d47a1; --primary-hover: #0b3a8a; --secondary-color: #e3f2fd; 
+            --card-bg: #ffffff; --text-dark: #263238; --text-light: #ffffff; --text-muted: #546e7a; 
+            --border-color: #bbdefb; --success-color: #2e7d32; --pending-color: #ef6c00; 
+            --error-color: #c62828; --shadow: 0 4px 15px rgba(0, 0, 0, 0.06); 
+            --shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.1); --border-radius: 10px;
+            --danger-color: #d32f2f; --danger-hover: #b71c1c;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--secondary-color);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        main {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 15px;
-        }
-
-        h1,
-        h2,
-        h3 {
-            margin-bottom: 1.25rem;
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        h1 {
-            font-size: 2.25rem;
-        }
-
-        h2 {
-            font-size: 1.75rem;
-        }
-
-        h3 {
-            font-size: 1.25rem;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 2.5rem;
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-            transition: box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            box-shadow: var(--shadow-hover);
-        }
-
-        hr {
-            border: 0;
-            height: 1px;
-            background: var(--border-color);
-            margin: 1.5rem 0;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--secondary-color); color: var(--text-dark); line-height: 1.6; }
+        main { max-width: 1200px; margin: 30px auto; padding: 0 15px; }
+        h1, h2, h3 { margin-bottom: 1.25rem; color: var(--primary-color); font-weight: 600; }
+        h1 { font-size: 2rem; } h2 { font-size: 1.6rem; } h3 { font-size: 1.2rem; }
+        .hidden { display: none !important; }
+        .card { background: var(--card-bg); border-radius: var(--border-radius); padding: 2.5rem; box-shadow: var(--shadow); margin-bottom: 2rem; transition: box-shadow 0.3s ease; }
+        hr { border: 0; height: 1px; background: var(--border-color); margin: 1.5rem 0; }
 
         /* --- Form Elements --- */
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 1.25rem;
-        }
-
-        .form-group label {
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            font-size: 0.9rem;
-            color: var(--text-dark);
-        }
-
-        .form-group input,
-        .form-group select {
-            padding: 0.8rem 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(0, 92, 151, 0.15);
-        }
-
-        .form-group.schedule-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 0.75rem;
-            align-items: center;
-        }
-
-        .form-group.schedule-grid label {
-            margin-bottom: 0;
-            color: var(--text-muted);
-        }
-
-        .grid-2-col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        button.btn-primary {
-            padding: 0.9rem 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
-            color: var(--text-light);
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            font-family: 'Poppins', sans-serif;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 1rem;
-            box-shadow: 0 4px 10px rgba(0, 92, 151, 0.2);
-        }
-
-        button.btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 92, 151, 0.3);
-        }
+        .form-group { display: flex; flex-direction: column; margin-bottom: 1.25rem; }
+        .form-group label { margin-bottom: 0.5rem; font-weight: 500; font-size: 0.9rem; color: var(--text-dark); }
+        .form-group input, .form-group select { padding: 0.8rem 1rem; border: 1px solid var(--border-color); border-radius: 6px; font-size: 1rem; font-family: 'Poppins', sans-serif; transition: border-color 0.2s, box-shadow 0.2s; background-color: #fff; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.15); }
+        .form-group.schedule-grid { display: grid; grid-template-columns: auto 1fr; gap: 0.75rem 1.5rem; align-items: center; }
+        .form-group.schedule-grid label { margin-bottom: 0; color: var(--text-muted); }
+        .grid-2-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        button.btn-primary { padding: 0.9rem 1.5rem; background: linear-gradient(135deg, var(--primary-color), var(--primary-hover)); color: var(--text-light); border: none; border-radius: 6px; font-size: 1.1rem; font-weight: 500; font-family: 'Poppins', sans-serif; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin-top: 1rem; box-shadow: 0 4px 10px rgba(13, 71, 161, 0.2); }
+        button.btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(13, 71, 161, 0.3); }
+        button:disabled { background: #90a4ae; cursor: not-allowed; box-shadow: none; transform: none; }
+        button.btn-danger { padding: 0.4rem 0.8rem; background-color: var(--danger-color); color: var(--text-light); border: none; border-radius: 4px; font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: background-color 0.2s; }
+        button.btn-danger:hover { background-color: var(--danger-hover); }
 
         /* --- Navigation Bar --- */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--text-dark);
-            padding: 1.25rem 2.5rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        nav .logo {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--text-light);
-            text-decoration: none;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            cursor: pointer;
-            transition: color 0.2s;
-            position: relative;
-            padding-bottom: 5px;
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-color);
-            transition: width 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: var(--primary-color);
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
+        nav { display: flex; justify-content: space-between; align-items: center; background: var(--text-dark); padding: 1rem 2.5rem; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+        nav .logo { font-size: 1.5rem; font-weight: 700; color: var(--text-light); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+        nav .logo img { width: 40px; height: 40px; vertical-align: middle; margin-right: 8px; border-radius: 50%; background-color: var(--secondary-color); }
+        nav ul { list-style: none; display: flex; gap: 1.5rem; } 
+        nav ul li a { color: var(--text-light); text-decoration: none; font-weight: 500; cursor: pointer; transition: color 0.2s; position: relative; padding-bottom: 5px; }
+        nav ul li a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--primary-color); transition: width 0.3s; }
+        nav ul li a:hover { color: var(--primary-color); }
+        nav ul li a:hover::after { width: 100%; }
 
         /* --- Login/Register Forms --- */
-        .form-container {
-            max-width: 550px;
-            margin: 3rem auto;
-        }
-
-        .form-container .form-tabs {
-            display: flex;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        .form-container .form-tabs button {
-            flex: 1;
-            padding: 1rem;
-            border: none;
-            background: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            border-bottom: 3px solid transparent;
-            transition: all 0.2s;
-            margin-bottom: -2px;
-        }
-
-        .form-container .form-tabs button.active {
-            color: var(--primary-color);
-            border-bottom-color: var(--primary-color);
-        }
-
+        .form-container { max-width: 550px; margin: 3rem auto; }
+        .form-container .form-tabs { display: flex; margin-bottom: 2rem; border-bottom: 2px solid var(--border-color); }
+        .form-container .form-tabs button { flex: 1; padding: 1rem; border: none; background: none; cursor: pointer; font-size: 1.1rem; font-weight: 500; color: var(--text-muted); border-bottom: 3px solid transparent; transition: all 0.2s; margin-bottom: -2px; }
+        .form-container .form-tabs button.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
+        
         /* --- Admin Dashboard --- */
-        .admin-controls {
-            display: flex;
-            margin-bottom: 1.5rem;
-            gap: 1rem;
-        }
-
-        #search-bar {
-            flex-grow: 1;
-            padding: 0.8rem 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        #search-bar:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(0, 92, 151, 0.15);
-        }
-
-        .customer-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-        }
-
-        .customer-card-header {
-            padding: 1.5rem 2rem;
-            background: var(--secondary-color);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .customer-card-header h3 {
-            margin: 0 0 0.5rem 0;
-            color: var(--text-dark);
-            font-weight: 600;
-        }
-
-        .customer-card-header p {
-            margin: 0;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .payment-section-admin {
-            padding: 1rem 2rem;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .payment-info {
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem 1rem;
-        }
-
-        .payment-info strong {
-            color: var(--text-dark);
-        }
-
-        .payment-control {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .customer-card-body {
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .status-day {
-            padding: 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            background: #fafafa;
-        }
-
-        .status-day.today {
-            border: 2px solid var(--primary-color);
-            background: #f0f7ff;
-            box-shadow: 0 0 10px rgba(0, 92, 151, 0.1);
-        }
-
-        .status-day strong {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-            color: var(--text-dark);
-        }
-
-        .status-day .service-type {
-            font-style: italic;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-        }
-
+        .admin-controls { display: flex; margin-bottom: 1.5rem; gap: 1rem; align-items: center; }
+        #search-bar { flex-grow: 1; padding: 0.8rem 1rem; border: 1px solid var(--border-color); border-radius: 6px; font-size: 1rem; font-family: 'Poppins', sans-serif; background-color: #fff; }
+        #search-bar:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.15); }
+        .customer-card { background: var(--card-bg); border: 1px solid #fff; border-radius: var(--border-radius); margin-bottom: 1.5rem; box-shadow: var(--shadow); overflow: hidden; }
+        .customer-card-header { padding: 1rem 1.5rem; background: #f8f9fa; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        .customer-card-header h3 { margin: 0; color: var(--text-dark); font-weight: 600; font-size: 1.1rem;}
+        .customer-card-header p { margin: 0; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
+        .payment-section-admin { padding: 0.8rem 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; background: #fafafa;}
+        .payment-info { font-size: 0.85rem; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 1rem;} 
+        .payment-info strong { color: var(--text-dark); }
+        .payment-control { display: flex; align-items: center; gap: 0.75rem; }
+        .customer-card-body { padding: 1.5rem; } 
+        .admin-current-week-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+        .admin-current-week-day { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: #fff; border-radius: 4px; border: 1px solid var(--border-color);}
+        .admin-current-week-day span:first-child { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); }
+        
         /* --- Custom Toggle Switch --- */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 28px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 28px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 20px;
-            width: 20px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-
-        input:checked+.slider {
-            background-color: var(--success-color);
-        }
-
-        input:focus+.slider {
-            box-shadow: 0 0 1px var(--success-color);
-        }
-
-        input:checked+.slider:before {
-            transform: translateX(22px);
-        }
-
-        .status-label {
-            margin-left: 10px;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .status-label.pending {
-            color: var(--pending-color);
-        }
-
-        .status-label.completed {
-            color: var(--success-color);
-        }
+        .switch { position: relative; display: inline-block; width: 44px; height: 24px; } 
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 24px; }
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; box-shadow: 0 1px 3px rgba(0,0,0,0.2);}
+        input:checked + .slider { background-color: var(--success-color); }
+        input:focus + .slider { box-shadow: 0 0 1px var(--success-color); }
+        input:checked + .slider:before { transform: translateX(20px); }
+        .status-label { margin-left: 8px; font-weight: 600; font-size: 0.85rem; vertical-align: middle;}
+        .status-label.pending { color: var(--pending-color); }
+        .status-label.completed { color: var(--success-color); }
 
         /* --- Customer Dashboard --- */
-        #customer-welcome {
-            text-align: center;
-            font-weight: 700;
-        }
-
-        .customer-car-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-        }
-
-        .customer-car-header {
-            padding: 1.5rem 2rem;
-            background: var(--secondary-color);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .customer-car-header h2 {
-            margin: 0;
-            color: var(--text-dark);
-        }
-
-        .customer-car-details {
-            padding: 1.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .customer-car-details .period-info {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem 1rem;
-        }
-
-        .customer-car-details p {
-            margin: 0;
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--text-muted);
-        }
-
-        .customer-car-details p strong {
-            color: var(--text-dark);
-        }
-
-        .payment-status-cust {
-            font-weight: 600;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-
-        .payment-status-cust.pending {
-            color: var(--pending-color);
-            background: #fef5e7;
-        }
-
-        .payment-status-cust.completed {
-            color: var(--success-color);
-            background: #eaf7ee;
-        }
-
-        .customer-car-body {
-            padding: 2rem;
-        }
-
-        .status-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .status-card {
-            padding: 1.5rem;
-            border-radius: 12px;
-            background: var(--secondary-color);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
-            border-left: 5px solid var(--border-color);
-        }
-
-        .status-card.today {
-            border-color: var(--primary-color);
-            background: var(--card-bg);
-            transform: scale(1.03);
-            box-shadow: var(--shadow);
-        }
-
-        .status-card h3 {
-            margin-top: 0;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-        }
-
-        .status-card .service-type {
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-        }
-
-        .status-display {
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .status-display.pending {
-            color: var(--pending-color);
-        }
-
-        .status-display.completed {
-            color: var(--success-color);
-        }
-
-        /* --- Month Dropdown Styling --- */
-        .month-dropdown {
-            padding: 0.3rem 0.6rem;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-family: 'Poppins', sans-serif;
-            margin-left: 0.5rem;
-            background-color: #fff;
-            color: var(--text-muted);
-            -webkit-appearance: none;
-            appearance: none;
-        }
-
-        /* Basic styling */
-
+        #customer-welcome { text-align: center; font-weight: 700; margin-bottom: 0.5rem;}
+        .customer-car-card { background: var(--card-bg); border-radius: var(--border-radius); margin-bottom: 2rem; box-shadow: var(--shadow); overflow: hidden; }
+        .customer-car-header { padding: 1.25rem 2rem; background: #f8f9fa; border-bottom: 1px solid var(--border-color); }
+        .customer-car-header h2 { margin: 0; color: var(--text-dark); font-size: 1.3rem;}
+        .customer-car-details { padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border-color); background: #fafafa;}
+        .customer-car-details .period-info { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 1rem;} 
+        .customer-car-details p { margin: 0; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); }
+        .customer-car-details p strong { color: var(--text-dark); }
+        .payment-status-cust { font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; }
+        .payment-status-cust.pending { color: var(--pending-color); background: #fff3e0; border: 1px solid #ffe0b2;}
+        .payment-status-cust.completed { color: var(--success-color); background: #e8f5e9; border: 1px solid #c8e6c9;}
+        .customer-car-body { padding: 2rem; } 
+        .status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; } 
+        .status-card { padding: 1.25rem; border-radius: 8px; background: var(--secondary-color); box-shadow: 0 2px 5px rgba(0,0,0,0.03); border-left: 4px solid var(--border-color); }
+        .status-card.today { border-color: var(--primary-color); background: var(--card-bg); transform: scale(1.03); box-shadow: var(--shadow); }
+        .status-card h3 { margin-top: 0; margin-bottom: 0.5rem; color: var(--text-dark); font-size: 1rem; }
+        .status-card .service-type { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); margin-bottom: 0.8rem; }
+        .status-display { font-size: 1.1rem; font-weight: 600; }
+        .status-display.pending { color: var(--pending-color); }
+        .status-display.completed { color: var(--success-color); }
+        .status-display.notscheduled { color: #bdbdbd; font-style: italic; font-size: 0.9rem;}
+        
+        /* --- History View & Monthly Status --- */
+        #history-view h2 { text-align: center; }
+        #history-search-controls { margin-bottom: 1.5rem; display: flex; gap: 1rem; } /* NEW */
+        #history-search-bar { flex-grow: 1; /* Inherits styles from #search-bar */}
+        .history-car-entry { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); }
+        .history-car-entry:last-child { border-bottom: none; margin-bottom: 0;}
+        .history-car-header { font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem; color: var(--primary-hover);}
+        .status-controls { margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+        .status-controls label { font-weight: 500; }
+        .month-year-select { padding: 0.5rem 0.8rem; border: 1px solid var(--border-color); border-radius: 6px; font-size: 1rem; font-family: 'Poppins', sans-serif; background-color: #fff; cursor: pointer;}
+        .week-summary { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px dashed var(--border-color); }
+        .week-summary:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0;}
+        .week-header { font-weight: 600; margin-bottom: 1rem; color: var(--primary-color); }
+        .day-status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; }
+        .day-status-item { padding: 0.8rem; border-radius: 6px; background-color: #f9f9f9; border: 1px solid var(--border-color); text-align: center;}
+        .day-status-item strong { display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.3rem; } 
+        .day-status-date { font-size: 0.8rem; color: #aaa; margin-bottom: 0.5rem;}
+        .day-status-value { font-weight: 600; font-size: 1rem; }
+        .day-status-value.completed { color: var(--success-color); }
+        .day-status-value.pending { color: var(--pending-color); }
+        .day-status-value.notscheduled { color: #bdbdbd; font-style: italic; font-size: 0.9rem;} 
+        .day-status-value.error { color: var(--error-color); } 
+        
         /* --- Static Content Pages --- */
-        .static-content {
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 2rem auto;
-        }
-
-        .static-content p {
-            margin-bottom: 1rem;
-        }
-
-        .static-content ul {
-            margin: 1rem 0 1rem 1.5rem;
-        }
+        .static-content { line-height: 1.8; max-width: 800px; margin: 2rem auto; }
+        .static-content p { margin-bottom: 1rem; }
+        .static-content ul { margin: 1rem 0 1rem 1.5rem; }
 
         /* --- Footer --- */
-        footer {
-            text-align: center;
-            padding: 2.5rem;
-            margin-top: 3rem;
-            background: #e9ecef;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
-        }
+        footer { text-align: center; padding: 2.5rem; margin-top: 3rem; background: #cfd8dc; color: var(--text-muted); border-top: 1px solid var(--border-color); } 
 
         /* --- Responsive Design --- */
-        @media (max-width: 992px) {
-            .form-group.schedule-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
+        @media (max-width: 992px) { .form-group.schedule-grid { grid-template-columns: 1fr; } }
         @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                gap: 1.5rem;
-                padding: 1.5rem;
-            }
-
-            nav ul {
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 1rem 1.5rem;
-            }
-
-            main {
-                margin-top: 20px;
-            }
-
-            .card {
-                padding: 1.5rem;
-            }
-
-            .grid-2-col {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-
-            .admin-controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .customer-card-body {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .payment-section-admin {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .payment-info {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
+            nav { flex-direction: column; gap: 1rem; padding: 1rem; }
+            nav ul { justify-content: center; flex-wrap: wrap; gap: 1rem 1.5rem; }
+            main { margin-top: 20px; }
+            .card { padding: 1.5rem; } h1{font-size: 1.8rem;} h2{font-size: 1.4rem;}
+            .grid-2-col { grid-template-columns: 1fr; gap: 0; }
+            .admin-controls, #history-search-controls { flex-direction: column; align-items: stretch; }
+            .payment-section-admin { flex-direction: column; align-items: flex-start; }
+            .payment-info { flex-direction: column; align-items: flex-start; gap: 0.5rem;} 
+            .customer-car-details .period-info { flex-direction: column; align-items: flex-start; gap: 0.5rem;}
+            .status-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); } 
         }
-
         @media (max-width: 480px) {
-            h1 {
-                font-size: 1.75rem;
-            }
-
-            h2 {
-                font-size: 1.4rem;
-            }
-
-            .customer-card-body,
-            .status-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-container .form-tabs button {
-                font-size: 1rem;
-            }
-
-            nav {
-                padding: 1.5rem 1rem;
-            }
-
-            nav ul {
-                gap: 0.5rem 1rem;
-            }
-
-            .customer-car-details {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
-
-            .customer-car-details .period-info {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
+            h1 { font-size: 1.6rem; } h2 { font-size: 1.3rem; } h3 { font-size: 1.1rem; }
+            .form-container .form-tabs button { font-size: 1rem; }
+            nav { padding: 1rem 0.5rem; } nav ul { gap: 0.5rem 1rem; }
+            .customer-car-details { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            .status-grid { grid-template-columns: 1fr 1fr; } 
+            .day-status-grid { grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 0.5rem;} 
         }
     </style>
 </head>
 
 <body>
-
+    
     <nav>
-        <a href="#" class="logo" id="nav-logo">🚗 DawnWash</a>
+        <a href="#" class="logo" id="nav-logo">
+            <img src="dawnwash.png" alt="DawnWash Logo"> DawnWash
+        </a>
         <ul>
             <li class="nav-item-logged-out"><a id="nav-login">Login</a></li>
             <li class="nav-item-logged-out"><a id="nav-register">Register Car</a></li>
             <li class="nav-item-logged-in hidden"><a id="nav-dashboard">Dashboard</a></li>
-            <li class="nav-item-common"><a id="nav-about">About Us</a></li>
+            <li class="nav-item-logged-in hidden"><a id="nav-history">History</a></li> <li class="nav-item-common"><a id="nav-about">About Us</a></li>
             <li class="nav-item-common"><a id="nav-contact">Contact Us</a></li>
             <li class="nav-item-logged-in hidden"><a id="nav-logout">Logout</a></li>
         </ul>
     </nav>
 
     <main>
-
         <section id="login-register-view">
-            <div class="card form-container">
-                <div class="form-tabs">
-                    <button id="login-tab-btn" class="active">Login</button>
-                    <button id="register-tab-btn">Register Car</button>
-                </div>
+             <div class="card form-container">
+                <div class="form-tabs"><button id="login-tab-btn" class="active">Login</button><button id="register-tab-btn">Register Car</button></div>
                 <form id="login-form">
-                    <div class="form-group">
-                        <label for="login-phone">Phone Number</label>
-                        <input type="text" id="login-phone" placeholder="Enter phone number or 'admin'" required>
-                    </div>
-                    <div class="form-group hidden" id="admin-password-group">
-                        <label for="login-password">Admin Password</label>
-                        <input type="password" id="login-password" placeholder="Enter admin password">
-                    </div>
+                    <div class="form-group"><label for="login-phone">Phone Number</label><input type="text" id="login-phone" placeholder="Enter phone or 'admin'" required></div>
+                    <div class="form-group hidden" id="admin-password-group"><label for="login-password">Admin Password</label><input type="password" id="login-password" placeholder="Enter password"></div>
                     <button type="submit" class="btn-primary">Login</button>
                 </form>
                 <form id="register-form" class="hidden">
-                    <div class="form-group">
-                        <label for="register-phone">Your Phone Number (Login ID)</label>
-                        <input type="tel" id="register-phone" placeholder="Enter 10-digit number" required>
-                    </div>
+                    <div class="form-group"><label for="register-phone">Your Phone Number (Login ID)</label><input type="tel" id="register-phone" placeholder="10-digit number" required pattern="\d{10}"></div>
                     <div class="grid-2-col">
-                        <div class="form-group"><label for="register-car">Car Number</label><input type="text"
-                                id="register-car" placeholder="e.g., KA 01 AB 1234" required></div>
-                        <div class="form-group"><label for="register-start-date">Start Date</label><input type="date"
-                                id="register-start-date" required></div>
+                        <div class="form-group"><label for="register-car">Car Number</label><input type="text" id="register-car" placeholder="e.g., KA01AB1234" required></div>
+                        <div class="form-group"><label for="register-start-date">Start Date</label><input type="date" id="register-start-date" required></div>
                     </div>
                     <hr><label>Set Weekly Schedule (EC = External, FC = Full)</label>
                     <div class="form-group schedule-grid">
-                        <label for="register-sch-mon">Monday</label><select id="register-sch-mon">
-                            <option value="None">None</option>
-                            <option value="EC">EC</option>
-                            <option value="FC">FC</option>
-                        </select>
-                        <label for="register-sch-tue">Tuesday</label><select id="register-sch-tue">
-                            <option value="None">None</option>
-                            <option value="EC">EC</option>
-                            <option value="FC">FC</option>
-                        </select>
-                        <label for="register-sch-wed">Wednesday</label><select id="register-sch-wed">
-                            <option value="None">None</option>
-                            <option value="EC">EC</option>
-                            <option value="FC">FC</option>
-                        </select>
-                        <label for="register-sch-thu">Thursday</label><select id="register-sch-thu">
-                            <option value="None">None</option>
-                            <option value="EC">EC</option>
-                            <option value="FC">FC</option>
-                        </select>
-                        <label for="register-sch-fri">Friday</label><select id="register-sch-fri">
-                            <option value="None">None</option>
-                            <option value="EC">EC</option>
-                            <option value="FC">FC</option>
-                        </select>
-                        <label for="register-sch-sat">Saturday</label><select id="register-sch-sat">
-                            <option value="None">None</option>
-                            <option value="EC">EC</option>
-                            <option value="FC">FC</option>
-                        </select>
+                        <label for="register-sch-mon">Mon</label><select id="register-sch-mon"><option value="None">None</option><option value="EC">EC</option><option value="FC">FC</option></select>
+                        <label for="register-sch-tue">Tue</label><select id="register-sch-tue"><option value="None">None</option><option value="EC">EC</option><option value="FC">FC</option></select>
+                        <label for="register-sch-wed">Wed</label><select id="register-sch-wed"><option value="None">None</option><option value="EC">EC</option><option value="FC">FC</option></select>
+                        <label for="register-sch-thu">Thu</label><select id="register-sch-thu"><option value="None">None</option><option value="EC">EC</option><option value="FC">FC</option></select>
+                        <label for="register-sch-fri">Fri</label><select id="register-sch-fri"><option value="None">None</option><option value="EC">EC</option><option value="FC">FC</option></select>
+                        <label for="register-sch-sat">Sat</label><select id="register-sch-sat"><option value="None">None</option><option value="EC">EC</option><option value="FC">FC</option></select>
                     </div>
                     <button type="submit" class="btn-primary">Register This Car</button>
                 </form>
@@ -761,14 +215,9 @@
 
         <section id="customer-dashboard-view" class="hidden">
             <h1 id="customer-welcome">Welcome!</h1>
-            <h2>Your Registered Cars & Status</h2>
-            <p style="text-align:center; color: var(--text-muted); margin-top: -1rem; margin-bottom: 2rem;">Service runs
-                Mon-Fri, 6:00 AM - 9:00 AM. Sunday is a holiday.</p>
+            <h2 style="text-align: center; margin-top: -1rem;">Your Registered Cars & Current Week Status</h2>
             <div id="customer-cars-list"></div>
-            <div id="customer-no-data" class="hidden card">
-                <p style="text-align: center;">You have not registered any cars for this phone number yet.<br>Please go
-                    to the "Register Car" page to add one.</p>
-            </div>
+            <div id="customer-no-data" class="hidden card"><p style="text-align: center;">No cars registered. Use "Register Car".</p></div>
         </section>
 
         <section id="admin-dashboard-view" class="hidden">
@@ -776,112 +225,86 @@
             <div class="card">
                 <h2>Add New Customer Car</h2>
                 <form id="admin-add-form">
-                    <div class="grid-2-col">
-                        <div class="form-group"><label for="admin-cust-phone">Customer Phone (Login ID)</label><input
-                                type="tel" id="admin-cust-phone" required></div>
-                        <div class="form-group"><label for="admin-cust-car">Car Number</label><input type="text"
-                                id="admin-cust-car" placeholder="e.g., KA 01 AB 1234" required></div>
+                     <div class="grid-2-col">
+                        <div class="form-group"><label for="admin-cust-phone">Customer Phone (Login ID)</label><input type="tel" id="admin-cust-phone" required pattern="\d{10}"></div>
+                        <div class="form-group"><label for="admin-cust-car">Car Number</label><input type="text" id="admin-cust-car" placeholder="e.g., KA01AB1234" required></div>
                     </div>
-                    <div class="form-group"><label for="admin-start-date">Start Date</label><input type="date"
-                            id="admin-start-date" required></div>
+                    <div class="form-group"><label for="admin-start-date">Start Date</label><input type="date" id="admin-start-date" required></div>
                     <hr><label>Set Weekly Schedule (EC = External, FC = Full)</label>
                     <div class="form-group schedule-grid">
-                        <label for="admin-sch-mon">Monday</label><select id="admin-sch-mon">
-                            <option value="None">None</option>
-                            <option value="EC">EC</option>
-                            <option value="FC">FC</option>
-                        </select>
-                        <label for="admin-sch-tue">Tuesday</label><select id="admin-sch-tue">
-                            <option value="None">None</option>
-                            <option value="EC">EC</option>
-                            <option value="FC">FC</option>
-                        </select>
-                        <label for="admin-sch-wed">Wednesday</label><select id="admin-sch-wed">
-                            <option value="None">None</option>
-                            <option value="EC">EC</option>
-                            <option value="FC">FC</option>
-                        </select>
-                        <label for="admin-sch-thu">Thursday</label><select id="admin-sch-thu">
-                            <option value="None">None</option>
-                            <option value="EC">EC</option>
-                            <option value="FC">FC</option>
-                        </select>
-                        <label for="admin-sch-fri">Friday</label><select id="admin-sch-fri">
-                            <option value="None">None</option>
-                            <option value="EC">EC</option>
-                            <option value="FC">FC</option>
-                        </select>
-                        <label for="admin-sch-sat">Saturday</label><select id="admin-sch-sat">
-                            <option value="None">None</option>
-                            <option value="EC">EC</option>
-                            <option value="FC">FC</option>
-                        </select>
+                       <label for="admin-sch-mon">Mon</label><select id="admin-sch-mon"><option value="None">None</option><option value="EC">EC</option><option value="FC">FC</option></select>
+                       <label for="admin-sch-tue">Tue</label><select id="admin-sch-tue"><option value="None">None</option><option value="EC">EC</option><option value="FC">FC</option></select>
+                       <label for="admin-sch-wed">Wed</label><select id="admin-sch-wed"><option value="None">None</option><option value="EC">EC</option><option value="FC">FC</option></select>
+                       <label for="admin-sch-thu">Thu</label><select id="admin-sch-thu"><option value="None">None</option><option value="EC">EC</option><option value="FC">FC</option></select>
+                       <label for="admin-sch-fri">Fri</label><select id="admin-sch-fri"><option value="None">None</option><option value="EC">EC</option><option value="FC">FC</option></select>
+                       <label for="admin-sch-sat">Sat</label><select id="admin-sch-sat"><option value="None">None</option><option value="EC">EC</option><option value="FC">FC</option></select>
                     </div>
                     <button type="submit" class="btn-primary">Add Customer Car</button>
                 </form>
             </div>
             <div class="card">
                 <h2>All Customer Cars</h2>
-                <div class="admin-controls"><input type="text" id="search-bar"
-                        placeholder="Search by phone or car number..."></div>
+                <div class="admin-controls"><input type="text" id="search-bar" placeholder="Search by phone or car number..."></div>
                 <div id="customer-list"></div>
             </div>
         </section>
 
+        <section id="history-view" class="hidden card">
+             <h2>Cleaning History</h2>
+             <div id="history-search-controls" class="admin-controls hidden"> 
+                 <input type="text" id="history-search-bar" class="search-bar" placeholder="Search history by phone number...">
+             </div>
+             <div id="history-content">
+                 <p style="text-align:center; color: var(--text-muted);">Loading history...</p>
+             </div>
+        </section>
+
         <section id="about-us-view" class="hidden card static-content">
             <h1>About DawnWash</h1>
-            <p>Welcome to <strong>DawnWash</strong>, your premium early-morning car cleaning service. We understand that
-                your time is valuable. That's why we operate from <strong>6:00 AM to 9:00 AM, Monday through
-                    Friday</strong>, ensuring your car is sparkling clean and ready for the day before you even start
-                your commute.</p>
-            <p>Our mission is simple: to provide a reliable, high-quality, and convenient car cleaning solution for busy
-                professionals and families. We use eco-friendly products and a meticulous cleaning process to ensure
-                your vehicle not only looks its best but is also treated with care.</p>
+            <p>Welcome to <strong>DawnWash</strong>, Bengaluru's premier early-morning car cleaning service tailored for your busy schedule. We understand the value of your time and the pride you take in your vehicle. That's why we operate efficiently between <strong>6:00 AM and 9:00 AM, Monday through Friday</strong>, ensuring your car is immaculately clean and ready to shine before your day truly begins.</p>
+            <p>Our mission is simple: deliver a reliable, top-quality, and utterly convenient car cleaning experience. Based in Basavanagudi, we serve the surrounding areas, bringing professional car care right to your doorstep. We are committed to using eco-friendly products and meticulous techniques, guaranteeing your vehicle not only looks its absolute best but is also treated with the utmost care it deserves.</p>
             <h2>Our Services</h2>
+            <p>We offer two core cleaning packages:</p>
             <ul>
-                <li><strong>External Cleaning (EC):</strong> A thorough wash and dry of your car's exterior, including
-                    windows and tires.</li>
-                <li><strong>Full Cleaning (FC):</strong> Includes the complete External Cleaning plus a detailed
-                    interior vacuum, dashboard wipe-down, and console cleaning.</li>
+                <li><strong>External Cleaning (EC):</strong> A comprehensive exterior wash and dry, focusing on paintwork, windows, mirrors, wheels, and tires for a sparkling finish.</li>
+                <li><strong>Full Cleaning (FC):</strong> Includes everything in the External Cleaning package, plus a thorough interior vacuuming of carpets, seats, and boot, along with wipe-downs of the dashboard, console, and door panels.</li>
             </ul>
-            <p>Our team is dedicated, professional, and fully trained. With DawnWash, you can wake up every morning to a
-                cleaner, fresher ride. Sunday is our day of rest, allowing us to recharge and be ready for the week
-                ahead!</p>
+            <p>Our team consists of dedicated, fully trained professionals passionate about making cars shine. With DawnWash, start every weekday morning with the satisfaction of a clean, fresh vehicle. We take Sundays off to ensure our team is rested and ready to provide exceptional service week after week.</p>
+             <p>Choose DawnWash – Wake up to a cleaner car!</p>
         </section>
 
         <section id="contact-us-view" class="hidden card static-content">
             <h1>Contact Us</h1>
-            <p>We'd love to hear from you! Whether you have a question about our services, need to set up a new
-                schedule, or have any feedback, please get in touch.</p>
+            <p>We're here to help! Whether you have questions about our cleaning packages, need assistance setting up or modifying your schedule, or wish to provide feedback, please don't hesitate to reach out.</p>
             <h2>Get in Touch</h2>
+            <p>Our customer support and admin team are available during business hours to assist you.</p>
             <ul>
-                <li><strong>Phone:</strong> +91 9538228164</li>
-                <li><strong>Email:</strong> contactdawnwash@gmail.com</li>
+                <li><strong>Phone:</strong> <a href="tel:+919538228164">+91 9538228164</a> (Call or WhatsApp)</li>
+                <li><strong>Email:</strong> <a href="mailto:contactdawnwash@gmail.com">contactdawnwash@gmail.com</a></li>
                 <li><strong>Service Hours:</strong> Monday - Friday, 6:00 AM to 9:00 AM</li>
-                <li><strong>Office Address:</strong> Basavanagudi, Bengaluru, Karnataka, 560004</li>
+                <li><strong>Office Location:</strong> Basavanagudi, Bengaluru, Karnataka, 560004 (Note: We are a mobile service; this is our administrative base.)</li>
             </ul>
-            <p>Please note that all scheduling and service management are handled by our admin team. If you are a
-                registered user, you can log in to your dashboard to see your weekly service status.</p>
+            <p>For existing customers, scheduling details and weekly service status updates are conveniently available by logging into your dashboard using your registered phone number. All new registrations and schedule management are handled efficiently by our admin team – just give us a call or email!</p>
+            <p>We look forward to making your car shine!</p>
         </section>
-
+        
     </main>
 
     <footer>
         <p>&copy; 2025 DawnWash. All rights reserved.</p>
-        <!-- <p>This is a demonstration website. Do not use for real transactions.</p> -->
+        <p><small>Built with care in Bengaluru.</small></p>
     </footer>
 
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
-
+        
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- START FIREBASE SETUP ---
             // ==========================================================
             // !!! PASTE YOUR FIREBASE CONFIGURATION OBJECT BELOW !!!
-            // (You get this from Firebase Console > Project Settings > General > Your Apps > Web App > Config)
             // ==========================================================
-            const firebaseConfig = {
+               const firebaseConfig = {
                 apiKey: "AIzaSyDAwlR_zCUZCN3Eqe_F3NYxeLO_v6wmuYw",
                 authDomain: "dawnwash-data.firebaseapp.com",
                 projectId: "dawnwash-data",
@@ -894,373 +317,373 @@
             // !!! MAKE SURE TO REPLACE THE PLACEHOLDER VALUES ABOVE !!!
             // ==========================================================
 
-            // Initialize Firebase
-            try {
-                firebase.initializeApp(firebaseConfig);
-            } catch (e) {
-                console.error("Firebase initialization failed:", e);
-                alert("Could not connect to the database. Please check your Firebase configuration in the index.html file.");
-                return; // Stop script execution if Firebase fails
-            }
-            const db = firebase.firestore(); // Get Firestore instance
+            try { firebase.initializeApp(firebaseConfig); } catch (e) { console.error("Firebase init failed:", e); alert("DB connection failed. Check config."); return; }
+            const db = firebase.firestore();
             // --- END FIREBASE SETUP ---
 
-            // --- STATE MANAGEMENT ---
-            let loggedInUser = null;
+            // --- STATE & CONSTANTS ---
+            let loggedInUser = null; 
             const ADMIN_USER = 'admin';
-            const ADMIN_PASS = 'sandesh043'; // Keep admin pass in code (insecure but per request)
-            const DAYS_OF_WEEK = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-            const DAY_NAMES = { mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday' };
-
-            // --- DOM Elements ---
-            const views = { login: document.getElementById('login-register-view'), customer: document.getElementById('customer-dashboard-view'), admin: document.getElementById('admin-dashboard-view'), about: document.getElementById('about-us-view'), contact: document.getElementById('contact-us-view') };
-            const nav = { logo: document.getElementById('nav-logo'), login: document.getElementById('nav-login'), register: document.getElementById('nav-register'), dashboard: document.getElementById('nav-dashboard'), about: document.getElementById('nav-about'), contact: document.getElementById('nav-contact'), logout: document.getElementById('nav-logout'), loggedInItems: document.querySelectorAll('.nav-item-logged-in'), loggedOutItems: document.querySelectorAll('.nav-item-logged-out') };
+            const ADMIN_PASS = 'sandesh043'; 
+            const DAYS_OF_WEEK = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat']; 
+            const DAY_INDICES = { mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6 }; 
+            const DAY_NAMES_SHORT = { mon: 'Mon', tue: 'Tue', wed: 'Wed', thu: 'Thu', fri: 'Fri', sat: 'Sat' };
+            let allFetchedCars = []; // Cache for admin history search
+            
+            // --- DOM Elements Cache ---
+            const views = { login: document.getElementById('login-register-view'), customer: document.getElementById('customer-dashboard-view'), admin: document.getElementById('admin-dashboard-view'), history: document.getElementById('history-view'), 
+                            about: document.getElementById('about-us-view'), contact: document.getElementById('contact-us-view') };
+            const nav = { logo: document.getElementById('nav-logo'), login: document.getElementById('nav-login'), register: document.getElementById('nav-register'), dashboard: document.getElementById('nav-dashboard'), history: document.getElementById('nav-history'), 
+                          about: document.getElementById('nav-about'), contact: document.getElementById('nav-contact'), logout: document.getElementById('nav-logout'), loggedInItems: document.querySelectorAll('.nav-item-logged-in'), loggedOutItems: document.querySelectorAll('.nav-item-logged-out') };
             const loginTabBtn = document.getElementById('login-tab-btn'), registerTabBtn = document.getElementById('register-tab-btn');
             const loginForm = document.getElementById('login-form'), registerForm = document.getElementById('register-form');
             const loginPhone = document.getElementById('login-phone'), adminPasswordGroup = document.getElementById('admin-password-group'), loginPassword = document.getElementById('login-password');
             const registerStartDate = document.getElementById('register-start-date');
             const adminAddForm = document.getElementById('admin-add-form'), searchBar = document.getElementById('search-bar'), customerList = document.getElementById('customer-list'), adminStartDate = document.getElementById('admin-start-date');
             const customerWelcome = document.getElementById('customer-welcome'), customerCarsList = document.getElementById('customer-cars-list'), customerNoData = document.getElementById('customer-no-data');
+            const historyContent = document.getElementById('history-content'); 
+            const historySearchControls = document.getElementById('history-search-controls'); 
+            const historySearchBar = document.getElementById('history-search-bar'); 
 
-            // --- HELPER FUNCTIONS ---
-            function showView(viewId) { Object.values(views).forEach(v => v.classList.add('hidden')); if (views[viewId]) views[viewId].classList.remove('hidden'); window.scrollTo(0, 0); }
-            function setTodayDate(el) { if (el) el.value = new Date().toISOString().split('T')[0]; }
-            function formatDate(d) { if (!d) return 'N/A'; const [y, m, day] = d.split('-'); return `${day}-${m}-${y}`; }
-            function updateNav() {
-                if (loggedInUser) {
-                    nav.loggedInItems.forEach(item => item.classList.remove('hidden'));
-                    nav.loggedOutItems.forEach(item => item.classList.add('hidden'));
-                    nav.dashboard.textContent = (loggedInUser === ADMIN_USER) ? 'Admin Dashboard' : 'My Cars';
-                } else {
-                    nav.loggedInItems.forEach(item => item.classList.add('hidden'));
-                    nav.loggedOutItems.forEach(item => item.classList.remove('hidden'));
+            // --- UTILITY FUNCTIONS ---
+            const showView = (viewId) => { Object.values(views).forEach(v => v.classList.add('hidden')); if(views[viewId]) views[viewId].classList.remove('hidden'); window.scrollTo(0,0); };
+            const setTodayDate = (el) => { if(el) el.value = new Date().toISOString().split('T')[0]; };
+            const formatDate = (dStr) => { if (!dStr) return 'N/A'; try { const [y,m,d] = dStr.split('-'); return `${d}-${m}-${y}`; } catch(e) { console.warn("formatDate error:", e, "Input:", dStr); return dStr; } }; // Added logging
+            const getIsoDate = (date) => date.toISOString().split('T')[0]; 
+            const getDayAbbr = (date) => ['sun','mon','tue','wed','thu','fri','sat'][date.getUTCDay()]; 
+
+            function updateNav() { 
+                 if (loggedInUser) { nav.loggedInItems.forEach(i => i.classList.remove('hidden')); nav.loggedOutItems.forEach(i => i.classList.add('hidden')); nav.dashboard.textContent = (loggedInUser === ADMIN_USER) ? 'Admin Dashboard' : 'Dashboard'; } 
+                 else { nav.loggedInItems.forEach(i => i.classList.add('hidden')); nav.loggedOutItems.forEach(i => i.classList.remove('hidden')); }
+            }
+            function getScheduleFromForm(pfx) { let s={}; DAYS_OF_WEEK.forEach(d => { const el = document.getElementById(`${pfx}-sch-${d}`); if (el) s[d] = el.value; }); return s; }
+            
+            // --- DATE FUNCTIONS ---
+            function getStartOfWeek(date) { 
+                const d = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+                const day = d.getUTCDay(); 
+                const diff = d.getUTCDate() - day + (day === 0 ? -6 : 1); 
+                return new Date(d.setUTCDate(diff));
+            }
+            function addDays(date, days) { const result = new Date(date); result.setUTCDate(result.getUTCDate() + days); return result; }
+            function getWeekDates(startDate) { 
+                const monday = getStartOfWeek(startDate); const dates = {};
+                for (let i = 0; i < 6; i++) {
+                    const cd = addDays(monday, i); const da = getDayAbbr(cd); if (DAYS_OF_WEEK.includes(da)) dates[da] = getIsoDate(cd);
+                } return dates;
+            }
+             function getWeeksInMonth(year, month) { 
+                const weeks = []; let first = new Date(Date.UTC(year, month, 1)); let last = new Date(Date.UTC(year, month + 1, 0)); 
+                let curMon = getStartOfWeek(first);
+                while (curMon <= last) { 
+                    const weekEnd = addDays(curMon, 6);
+                    if ((curMon.getUTCMonth() === month && curMon.getUTCFullYear() === year) || (weekEnd.getUTCMonth() === month && weekEnd.getUTCFullYear() === year)) {
+                        const weekDates = {}; 
+                        for (let i=0; i<6; i++) { const day=addDays(curMon, i); if (DAYS_OF_WEEK[i]) weekDates[DAYS_OF_WEEK[i]] = getIsoDate(day); } // Safer check
+                        weeks.push({ startDate: getIsoDate(curMon), endDate: getIsoDate(addDays(curMon, 5)), dates: weekDates });
+                    }
+                    curMon = addDays(curMon, 7);
+                    if (curMon.getUTCFullYear() > year || (curMon.getUTCFullYear() === year && curMon.getUTCMonth() > month)) break; 
+                } return weeks;
+            }
+
+            // Updated to show future months until July 2026
+            function generateMonthYearSelectOptions() {
+                let opts = ''; 
+                const today = new Date(); // e.g., Oct 2025
+                const mn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                const endMonth = 6; // July (0-indexed)
+                const endYear = 2026;
+                
+                let currentYear = today.getFullYear(); 
+                let currentMonth = today.getMonth(); 
+
+                for (let i=0; i<15; i++) { // Generate enough months to reach the target
+                     const date = new Date(currentYear, currentMonth + i, 1);
+                     const m = date.getMonth();
+                     const y = date.getFullYear();
+
+                     // Stop if we go past July 2026
+                     if (y > endYear || (y === endYear && m > endMonth)) break; 
+                     
+                     const isCurrent = (y === today.getFullYear() && m === today.getMonth()); // Mark current month
+                     opts += `<option value="${y}-${m}" ${isCurrent ? 'selected' : ''}>${mn[m]} ${y}</option>`;
                 }
-            }
-            function getTodayString() { const i = new Date().getDay(); return ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'][i] || 'sun'; }
-            function getScheduleFromForm(pfx) { let s = {}; DAYS_OF_WEEK.forEach(d => { const el = document.getElementById(`${pfx}-sch-${d}`); if (el) s[d] = el.value; }); return s; }
-
-            function generateMonthOptions() {
-                let optionsHTML = '';
-                const today = new Date();
-                const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]; // Shorter names
-                for (let i = 0; i < 7; i++) {
-                    const date = new Date(today.getFullYear(), today.getMonth() + i, 1);
-                    const month = monthNames[date.getMonth()];
-                    const year = date.getFullYear();
-                    optionsHTML += `<option value="${month}-${year}">${month} ${year}</option>`;
-                }
-                return `<select class="month-dropdown" disabled>${optionsHTML}</select>`;
+                 return opts;
             }
 
-            function createCustomerObject(phone, car, start, schedule) {
-                const startDate = new Date(start + 'T00:00:00Z'); // Treat start date as UTC to avoid timezone shifts
-                const end = new Date(startDate.getTime() + (28 * 24 * 60 * 60 * 1000)); // Add exactly 28 days
-                const endDate = end.toISOString().split('T')[0];
-                // Ensure status object is fully populated
-                let initialStatus = {};
-                DAYS_OF_WEEK.forEach(day => initialStatus[day] = 'Pending');
 
-                return {
-                    id: phone, // Customer phone number
-                    carNumber: car,
-                    startDate: start, // YYYY-MM-DD
-                    endDate: endDate, // YYYY-MM-DD (calculated)
-                    paymentStatus: 'Pending',
-                    schedule: schedule, // {mon: 'EC', tue: 'None', ...}
-                    status: initialStatus // {mon: 'Pending', tue: 'Pending', ...}
-                };
+            function createCustomerObject(phone, car, start, schedule) { 
+                 const sDate = new Date(start + 'T00:00:00Z'); 
+                 const eDate = new Date(sDate.getTime() + (28 * 24 * 60 * 60 * 1000)); 
+                 return { id: phone, carNumber: car, startDate: start, endDate: getIsoDate(eDate), paymentStatus: 'Pending', schedule: schedule, dailyStatus: {} }; 
             }
 
-            // --- RENDER FUNCTIONS (Now Async for Firebase) ---
-            async function renderCustomerDashboard() {
-                if (!loggedInUser) return;
-                customerWelcome.textContent = `Welcome, ${loggedInUser}!`;
-                customerCarsList.innerHTML = '<p style="text-align: center; color: var(--text-muted);">Loading your cars...</p>';
-                customerNoData.classList.add('hidden');
+            // --- RENDER FUNCTIONS ---
 
-                try {
-                    const querySnapshot = await db.collection("cars").where("id", "==", loggedInUser).get();
-                    let userCars = [];
-                    querySnapshot.forEach((doc) => userCars.push({ firestoreId: doc.id, ...doc.data() }));
+            /** Renders status history for a selected month */
+            function renderMonthlyStatusHistory(containerElement, carData, year, month) {
+                 containerElement.innerHTML = '<p>Loading history...</p>'; const wks = getWeeksInMonth(year, month); let html = '';
+                 if (wks.length === 0) { containerElement.innerHTML = '<p>No schedule recorded for this month.</p>'; return; } 
+                 wks.forEach(wk => {
+                     html += `<div class="week-summary"><h4 class="week-header">Week of ${formatDate(wk.startDate)}</h4><div class="day-status-grid">`;
+                     DAYS_OF_WEEK.forEach(dk => {
+                         const dStr = wk.dates[dk]; const sched = carData.schedule?.[dk] || 'None';
+                         let stat = carData.dailyStatus?.[dStr]; let sClass = '', sText = '';
+                         if (sched !== 'None') { stat = stat || 'Pending'; sClass = stat === 'Completed' ? 'completed' : 'pending'; sText = stat === 'Completed' ? `✔ ${sched}` : `⌛ ${sched}`; } 
+                         else { sClass = 'notscheduled'; sText = 'Not Scheduled'; }
+                         // Added check for valid date string before formatting
+                         html += `<div class="day-status-item"><strong>${DAY_NAMES_SHORT[dk]}</strong><div class="day-status-date">${dStr ? formatDate(dStr) : '-'}</div><div class="day-status-value ${sClass}">${sText}</div></div>`;
+                     }); html += `</div></div>`; 
+                 }); containerElement.innerHTML = html;
+            }
 
-                    customerCarsList.innerHTML = '';
-                    if (userCars.length === 0) { customerNoData.classList.remove('hidden'); customerCarsList.classList.add('hidden'); return; }
+            // Renders CURRENT WEEK status for Customer Dashboard
+            function renderCustomerCurrentWeek(containerElement, carData) {
+                 const today = new Date(); const currentWeekDates = getWeekDates(today); let html = '<div class="status-grid">';
+                 DAYS_OF_WEEK.forEach(dayKey => {
+                     const dateStr = currentWeekDates[dayKey]; if (!dateStr) return;
+                     const scheduledService = carData.schedule?.[dayKey] || 'None';
+                     let status = carData.dailyStatus?.[dateStr]; let statusClass = '', statusText = '';
+                     const isToday = (getIsoDate(today) === dateStr);
 
-                    customerNoData.classList.add('hidden'); customerCarsList.classList.remove('hidden');
-                    const today = getTodayString();
-                    const monthOptionsHTML = generateMonthOptions();
-
-                    userCars.forEach(car => {
-                        let statusGridHTML = '';
-                        DAYS_OF_WEEK.forEach(day => {
-                            const service = car.schedule?.[day] || 'None'; // Use optional chaining
-                            const status = car.status?.[day] || 'Pending'; // Use optional chaining
-                            if (service === 'None') return;
-                            const isToday = (day === today); let statusText = 'Pending ⌛'; let statusClass = 'pending';
-                            if (status === 'Completed') { statusText = 'Completed ✔'; statusClass = 'completed'; }
-                            statusGridHTML += `<div class="status-card ${isToday ? 'today' : ''}">${'<h3>'}${DAY_NAMES[day]}</h3><p class="service-type">${service === 'EC' ? 'External' : 'Full'} Cleaning</p><p class="status-display ${statusClass}">${statusText}</p></div>`;
-                        });
-                        const paymentClass = (car.paymentStatus || 'Pending').toLowerCase();
-                        const paymentText = (car.paymentStatus === 'Received') ? 'Received ✔' : 'Pending ⌛';
-                        const carCard = document.createElement('div'); carCard.className = 'customer-car-card';
-                        carCard.innerHTML = `
-                            <div class="customer-car-header"><h2>Car: ${car.carNumber}</h2></div>
-                            <div class="customer-car-details">
-                                 <div class="period-info"> 
-                                    <p>Period: <strong>${formatDate(car.startDate)}</strong> to <strong>${formatDate(car.endDate)}</strong></p>
-                                    ${monthOptionsHTML} 
-                                 </div>
-                                <span class="payment-status-cust ${paymentClass}">Payment: ${paymentText}</span>
-                            </div>
-                            <div class="customer-car-body"><div class="status-grid">${statusGridHTML}</div></div>`;
-                        customerCarsList.appendChild(carCard);
+                     if (scheduledService !== 'None') {
+                         status = status || 'Pending'; 
+                         statusClass = status === 'Completed' ? 'completed' : 'pending';
+                         statusText = status === 'Completed' ? `✔ Completed` : `⌛ Pending`;
+                     } else {
+                         statusClass = 'notscheduled'; statusText = 'Not Scheduled';
+                     }
+                     html += `<div class="status-card ${isToday?'today':''}"><h3>${DAY_NAMES_SHORT[dayKey]}</h3><p class="service-type">${scheduledService === 'None' ? '-' : scheduledService}</p><p class="status-display ${statusClass}">${statusText}</p></div>`;
+                 });
+                 html += '</div>'; containerElement.innerHTML = html;
+            }
+            
+            // Renders CURRENT WEEK toggles for Admin Dashboard
+            function renderAdminCurrentWeekToggles(containerElement, carData) {
+                 const today = new Date(); const currentWeekDates = getWeekDates(today); let html = '<div class="admin-current-week-grid">'; 
+                 DAYS_OF_WEEK.forEach(dayKey => {
+                     const dateStr = currentWeekDates[dayKey]; if (!dateStr) return; 
+                     const sched = carData.schedule?.[dayKey] || 'None'; // Corrected typo here
+                     if (sched === 'None') { html += `<div class="admin-current-week-day"><span>${DAY_NAMES_SHORT[dayKey]} (${formatDate(dateStr)})</span><span>Not Scheduled</span></div>`; } 
+                     else { const curStat = carData.dailyStatus?.[dateStr] || 'Pending'; const isChk = curStat === 'Completed';
+                         html += `<div class="admin-current-week-day"><span>${DAY_NAMES_SHORT[dayKey]} (${formatDate(dateStr)}) <small>[${sched}]</small></span><label class="switch"><input type="checkbox" class="status-toggle-current-week" data-firestore-id="${carData.firestoreId}" data-date="${dateStr}" ${isChk ? 'checked' : ''}><span class="slider"></span></label></div>`;
+                     }
+                 }); html += '</div>'; containerElement.innerHTML = html; 
+            }
+           
+            // Modified renderCustomerDashboard to show Current Week
+            async function renderCustomerDashboard() { 
+                if (!loggedInUser) return; customerWelcome.textContent = `Welcome, ${loggedInUser}!`; customerCarsList.innerHTML = '<p style="text-align:center;">Loading cars...</p>'; customerNoData.classList.add('hidden'); 
+                try { const qSnap = await db.collection("cars").where("id", "==", loggedInUser).get(); let cars = []; qSnap.forEach((doc) => cars.push({ firestoreId: doc.id, ...doc.data() }));
+                    customerCarsList.innerHTML = ''; if (cars.length === 0) { customerNoData.classList.remove('hidden'); customerCarsList.classList.add('hidden'); return; }
+                    customerNoData.classList.add('hidden'); customerCarsList.classList.remove('hidden'); 
+                    cars.forEach(car => { 
+                         const pClass = (car.paymentStatus || 'Pending').toLowerCase(); const pText = (car.paymentStatus === 'Received') ? 'Received ✔' : 'Pending ⌛';
+                         const card = document.createElement('div'); card.className = 'customer-car-card'; 
+                         card.innerHTML = `<div class="customer-car-header"><h2>Car: ${car.carNumber}</h2></div><div class="customer-car-details"><div class="period-info"><p>Period: <strong>${formatDate(car.startDate)}</strong> to <strong>${formatDate(car.endDate)}</strong></p></div><span class="payment-status-cust ${pClass}">Payment: ${pText}</span></div><div class="customer-car-body"><h3 style="margin-bottom: 1rem; text-align: center;">Current Week Status</h3><div class="current-week-status-display" id="current-status-${car.firestoreId}"></div></div>`;
+                         customerCarsList.appendChild(card);
+                         const currentStatusArea = card.querySelector(`#current-status-${car.firestoreId}`);
+                         renderCustomerCurrentWeek(currentStatusArea, car); 
                     });
-
-                } catch (error) {
-                    console.error("Error getting user cars: ", error);
-                    customerCarsList.innerHTML = '<p style="text-align: center; color: red;">Failed to load your cars.</p>';
-                }
+                } catch (err) { console.error("Cust DB Error:", err); customerCarsList.innerHTML = '<p style="text-align:center; color:red;">Failed to load.</p>'; }
             }
-
-            async function renderAdminDashboard() {
-                const term = searchBar.value.toLowerCase();
-                customerList.innerHTML = '<p style="text-align: center; color: var(--text-muted);">Loading cars...</p>';
-
-                try {
-                    const querySnapshot = await db.collection("cars").orderBy("id").get(); // Order by phone number
-                    let allCars = [];
-                    querySnapshot.forEach((doc) => allCars.push({ firestoreId: doc.id, ...doc.data() }));
-
-                    const filtered = term ? allCars.filter(c => c.id.includes(term) || c.carNumber.toLowerCase().includes(term)) : allCars; // Filter if term exists
-                    customerList.innerHTML = '';
-                    if (filtered.length === 0) { customerList.innerHTML = '<p style="text-align:center; color:var(--text-muted);">No cars found.</p>'; return; }
-
-                    const today = getTodayString();
-                    const monthOptionsHTML = generateMonthOptions();
-
-                    filtered.forEach(cust => {
-                        let statusHTML = '';
-                        DAYS_OF_WEEK.forEach(day => {
-                            const service = cust.schedule?.[day] || 'None'; if (service === 'None') return; // Optional chaining
-                            const isToday = (day === today); const isChecked = (cust.status && cust.status[day] === 'Completed');
-                            const statusText = isChecked ? 'Completed' : 'Pending'; const statusClass = isChecked ? 'completed' : 'pending';
-                            statusHTML += `<div class="status-day ${isToday ? 'today' : ''}">${'<strong>'}${DAY_NAMES[day]}</strong><p class="service-type">${service}</p><label class="switch"><input type="checkbox" class="status-toggle" data-firestore-id="${cust.firestoreId}" data-day="${day}" ${isChecked ? 'checked' : ''}>${'<span class="slider"></span>'}</label><span class="status-label ${statusClass}">${statusText}</span></div>`;
-                        });
-                        const isPayChecked = cust.paymentStatus === 'Received'; const payText = isPayChecked ? 'Received' : 'Pending'; const payClass = isPayChecked ? 'completed' : 'pending';
-                        const card = document.createElement('div'); card.className = 'customer-card';
+            
+            // Modified renderAdminDashboard to show Current Week Toggles
+            async function renderAdminDashboard() { 
+                const term = searchBar.value.toLowerCase(); customerList.innerHTML = '<p style="text-align:center;">Loading...</p>'; 
+                try { const qSnap = await db.collection("cars").orderBy("id").get(); let allC = []; qSnap.forEach((doc) => allC.push({ firestoreId: doc.id, ...doc.data() }));
+                    const filt = term ? allC.filter(c => c.id.includes(term) || c.carNumber.toLowerCase().includes(term)) : allC; 
+                    customerList.innerHTML = ''; if (filt.length === 0) { customerList.innerHTML = '<p style="text-align:center;">No cars found.</p>'; return; }
+                    filt.forEach(cust => {
+                        const isPayChk = cust.paymentStatus === 'Received'; const payTxt = isPayChk ? 'Received' : 'Pending'; const payCls = isPayChk ? 'completed' : 'pending';
+                        const card = document.createElement('div'); card.className = 'customer-card'; 
                         card.innerHTML = `
-                            <div class="customer-card-header"><h3>Car: ${cust.carNumber}</h3><p>Phone: ${cust.id}</p></div>
+                            <div class="customer-card-header">
+                                <div><h3>Car: ${cust.carNumber}</h3><p>Phone: ${cust.id}</p></div>
+                                <button class="btn-danger delete-car-btn" data-firestore-id="${cust.firestoreId}">Delete</button> 
+                            </div>
                             <div class="payment-section-admin">
-                                <div class="payment-info">
-                                    <span>Period: <strong>${formatDate(cust.startDate)}</strong> to <strong>${formatDate(cust.endDate)}</strong></span>
-                                    ${monthOptionsHTML}
-                                </div>
+                                <div class="payment-info"><span>Period: <strong>${formatDate(cust.startDate)}</strong> to <strong>${formatDate(cust.endDate)}</strong></span></div>
                                 <div class="payment-control">
-                                    <label class="switch"><input type="checkbox" class="payment-toggle" data-firestore-id="${cust.firestoreId}" ${isPayChecked ? 'checked' : ''}>${'<span class="slider"></span>'}</label>
-                                    <span class="status-label ${payClass}">${payText}</span>
+                                    <label class="switch"><input type="checkbox" class="payment-toggle" data-firestore-id="${cust.firestoreId}" ${isPayChk ? 'checked' : ''}><span class="slider"></span></label>
+                                    <span class="status-label ${payCls}">${payTxt}</span>
                                 </div>
                             </div>
-                            <div class="customer-card-body">${statusHTML}</div>`;
+                            <div class="customer-car-body">
+                                <h4 style="margin-bottom:1rem; text-align:center;">Update Current Week Status</h4>
+                                <div class="current-week-toggles-display" id="current-toggles-${cust.firestoreId}"></div>
+                            </div>`;
                         customerList.appendChild(card);
+                        const togglesArea = card.querySelector(`#current-toggles-${cust.firestoreId}`);
+                        renderAdminCurrentWeekToggles(togglesArea, cust); 
                     });
-                } catch (error) {
-                    console.error("Error getting documents: ", error);
-                    customerList.innerHTML = '<p style="text-align: center; color: red;">Failed to load cars.</p>';
-                }
+                } catch (err) { console.error("Admin DB Error:", err); customerList.innerHTML = '<p style="text-align:center; color:red;">Failed to load.</p>'; }
             }
 
-            // --- EVENT HANDLERS (Now Async for Firebase) ---
-            async function handleLogin(e) {
-                e.preventDefault(); const phone = loginPhone.value.trim(); // Trim whitespace
-                if (!phone) { alert("Please enter a phone number or 'admin'."); return; }
-
-                if (phone.toLowerCase() === ADMIN_USER) { // Case-insensitive admin check
-                    if (loginPassword.value === ADMIN_PASS) {
-                        loggedInUser = ADMIN_USER;
-                        showView('admin');
-                        await renderAdminDashboard(); // Load data after showing view
-                        updateNav();
-                        loginForm.reset();
-                        adminPasswordGroup.classList.add('hidden');
-                    } else { alert('Invalid admin password.'); }
-                    return;
-                }
-
-                // Check if user exists in DB
-                const loginButton = loginForm.querySelector('button[type="submit"]');
-                loginButton.textContent = 'Checking...'; loginButton.disabled = true;
+            /** Renders the content for the History View (with Admin Search) */
+             async function renderHistoryView(searchTerm = '') { 
+                historyContent.innerHTML = '<p style="text-align:center;">Loading car data...</p>';
+                let carsToDisplay = [];
 
                 try {
-                    const querySnapshot = await db.collection("cars").where("id", "==", phone).limit(1).get();
-                    if (!querySnapshot.empty) {
-                        loggedInUser = phone;
-                        showView('customer');
-                        await renderCustomerDashboard();
-                        updateNav();
-                        loginForm.reset();
-                    } else {
-                        alert('Phone number not found. Please register your car first or check the number.');
+                    historySearchControls.classList.toggle('hidden', loggedInUser !== ADMIN_USER); 
+
+                    if (loggedInUser === ADMIN_USER) {
+                        // Always fetch for admin search, don't rely heavily on cache here
+                        allFetchedCars = []; 
+                        const querySnapshot = await db.collection("cars").orderBy("id").get();
+                        querySnapshot.forEach((doc) => allFetchedCars.push({ firestoreId: doc.id, ...doc.data() }));
+                        
+                        carsToDisplay = searchTerm 
+                            ? allFetchedCars.filter(car => car.id.includes(searchTerm)) 
+                            : allFetchedCars;
+
+                    } else if (loggedInUser) {
+                        const querySnapshot = await db.collection("cars").where("id", "==", loggedInUser).get();
+                        querySnapshot.forEach((doc) => carsToDisplay.push({ firestoreId: doc.id, ...doc.data() }));
+                    } else { historyContent.innerHTML = '<p style="text-align:center; color:red;">Log in to view history.</p>'; return; }
+
+                    if (carsToDisplay.length === 0) {
+                        historyContent.innerHTML = `<p style="text-align:center;">No cars found${searchTerm ? ' matching "' + searchTerm + '"': ''}.</p>`; 
+                        return; 
                     }
-                } catch (error) {
-                    console.error("Login check failed:", error);
-                    alert("Login failed. Could not check database.");
-                } finally {
-                    loginButton.textContent = 'Login'; loginButton.disabled = false;
+
+                    let historyHTML = '';
+                    carsToDisplay.forEach(car => {
+                        const monthYearOptions = generateMonthYearSelectOptions();
+                        historyHTML += `
+                            <div class="history-car-entry">
+                                <h3 class="history-car-header">Car: ${car.carNumber} ${loggedInUser === ADMIN_USER ? `(${car.id})` : ''}</h3>
+                                <div class="status-controls">
+                                    <label for="history-month-select-${car.firestoreId}">View History For:</label>
+                                    <select class="month-year-select history-month-select" id="history-month-select-${car.firestoreId}" data-firestore-id="${car.firestoreId}">
+                                        ${monthYearOptions}
+                                    </select>
+                                </div>
+                                <div class="monthly-status-display" id="history-status-display-${car.firestoreId}"></div>
+                            </div>`;
+                    });
+                    historyContent.innerHTML = historyHTML;
+
+                    // Add event listeners AFTER adding HTML
+                    document.querySelectorAll('.history-month-select').forEach(selectElement => {
+                        const fsId = selectElement.dataset.firestoreId;
+                        const displayArea = document.getElementById(`history-status-display-${fsId}`);
+                        const carData = carsToDisplay.find(c => c.firestoreId === fsId); 
+
+                        if (displayArea && carData) {
+                             const [initialYear, initialMonth] = selectElement.value.split('-').map(Number);
+                             renderMonthlyStatusHistory(displayArea, carData, initialYear, initialMonth);
+                            selectElement.addEventListener('change', (e) => {
+                                const [year, month] = e.target.value.split('-').map(Number);
+                                renderMonthlyStatusHistory(displayArea, carData, year, month);
+                            });
+                        }
+                    });
+
+                } catch (error) { console.error("History View Error:", error); historyContent.innerHTML = '<p style="text-align:center; color:red;">Failed to load history.</p>'; }
+            }
+
+            // --- EVENT HANDLERS ---
+            async function handleLogin(e) { 
+                e.preventDefault(); const ph = loginPhone.value.trim(); if (!ph) { alert("Enter phone or 'admin'."); return; }
+                if (ph.toLowerCase() === ADMIN_USER) { if (loginPassword.value === ADMIN_PASS) { loggedInUser = ADMIN_USER; showView('admin'); await renderAdminDashboard(); updateNav(); loginForm.reset(); adminPasswordGroup.classList.add('hidden'); } else { alert('Invalid password.'); } return; }
+                const btn = loginForm.querySelector('button'); btn.textContent = 'Checking...'; btn.disabled = true;
+                try { const q = await db.collection("cars").where("id", "==", ph).limit(1).get(); if (!q.empty) { loggedInUser = ph; showView('customer'); await renderCustomerDashboard(); updateNav(); loginForm.reset(); } else { alert('Phone not registered.'); } } catch(err) { console.error("Login check:", err); alert("Login failed."); } finally { btn.textContent = 'Login'; btn.disabled = false; }
+            }
+            async function handleCarRegistration(e, type) { 
+                 e.preventDefault(); const pfx = type; 
+                 const phEl = document.getElementById(`${pfx}${type==='admin'?'-cust':''}-phone`); const carEl = document.getElementById(`${pfx}${type==='admin'?'-cust':''}-car`); const stEl = document.getElementById(`${pfx}-start-date`);
+                 const ph = phEl?.value.trim(); const cNum = carEl?.value.trim().toUpperCase(); const st = stEl?.value; const frm = (type === 'admin') ? adminAddForm : registerForm; const btn = frm.querySelector('button');
+                 if (!ph || !/^\d{10}$/.test(ph)) { alert("Valid 10-digit phone required."); return; } if (!cNum) { alert("Car number required."); return; } if (!st) { alert("Start date required."); return; }
+                 btn.textContent = 'Registering...'; btn.disabled = true;
+                 try { const q = await db.collection("cars").where("id", "==", ph).where("carNumber", "==", cNum).limit(1).get(); if (!q.empty) { alert('Car already registered.'); return; }
+                     const sched = getScheduleFromForm(pfx); const nData = createCustomerObject(ph, cNum, st, sched); await db.collection("cars").add(nData); 
+                     allFetchedCars = []; // Clear admin cache after adding
+                     frm.reset(); setTodayDate(stEl); if (type === 'register') { alert('Car registered! Login.'); loginTabBtn.click(); } else { alert(`Car ${cNum} added for ${ph}.`); await renderAdminDashboard(); }
+                 } catch (err) { console.error("Reg Error:", err); alert("Registration failed."); } finally { btn.textContent = type === 'admin' ? 'Add Car' : 'Register Car'; btn.disabled = false; }
+            }
+            
+            async function handleAdminToggle(e) { 
+                const tgl = e.target; 
+                if (!tgl.matches('.status-toggle-current-week, .payment-toggle')) return; 
+                const docId = tgl.dataset.firestoreId; if (!docId) { console.error("ID missing!"); return; }
+                const docRef = db.collection("cars").doc(docId); let updData = {}; let lblEl = tgl.closest('label')?.nextElementSibling; 
+                const wasChk = !tgl.checked; 
+                try { tgl.disabled = true; 
+                    if (tgl.classList.contains('status-toggle-current-week')) {
+                        const dtStr = tgl.dataset.date; if (!dtStr) throw new Error("Date missing"); const nStat = tgl.checked ? 'Completed' : 'Pending'; updData[`dailyStatus.${dtStr}`] = nStat; console.log(`Updating ${dtStr} to ${nStat}`);
+                         allFetchedCars = []; // Clear cache as data changed
+                    }
+                    if (tgl.classList.contains('payment-toggle')) {
+                        const nStat = tgl.checked ? 'Received' : 'Pending'; updData.paymentStatus = nStat; if (lblEl) { lblEl.textContent = nStat; lblEl.className = `status-label ${nStat === 'Received' ? 'completed' : 'pending'}`; }
+                         allFetchedCars = []; // Clear cache as data changed
+                    }
+                    if (Object.keys(updData).length > 0) { 
+                        await docRef.update(updData); console.log("Doc updated!");
+                    }
+                } catch (err) { console.error("Update Error:", err); alert("Update failed."); tgl.checked = wasChk; 
+                     if (lblEl && tgl.classList.contains('payment-toggle')) { const oStat = tgl.checked ? 'Received' : 'Pending'; lblEl.textContent = oStat; lblEl.className = `status-label ${oStat === 'Received' ? 'completed' : 'pending'}`; }
+                } finally { tgl.disabled = false; }
+            }
+
+            async function handleDeleteCar(e) {
+                if (!e.target.classList.contains('delete-car-btn')) return; 
+                const btn = e.target; const docId = btn.dataset.firestoreId; const card = btn.closest('.customer-card'); 
+                const carInfo = card?.querySelector('h3')?.textContent || 'this car'; 
+                if (!docId) { console.error("ID missing on delete!"); return; }
+                if (confirm(`DELETE ${carInfo}? This is permanent.`)) {
+                    btn.textContent = 'Deleting...'; btn.disabled = true;
+                    try { await db.collection("cars").doc(docId).delete(); console.log("Doc deleted!"); card.remove(); allFetchedCars = []; /* Clear cache */ } 
+                    catch (err) { console.error("Delete Error:", err); alert(`Failed to delete ${carInfo}.`); btn.textContent = 'Delete'; btn.disabled = false; }
                 }
             }
-
-            async function handleCarRegistration(e, type) {
-                e.preventDefault();
-                const prefix = type;
-                const phoneEl = document.getElementById(`${prefix}${type === 'admin' ? '-cust' : ''}-phone`);
-                const carEl = document.getElementById(`${prefix}${type === 'admin' ? '-cust' : ''}-car`);
-                const startEl = document.getElementById(`${prefix}-start-date`);
-
-                const phone = phoneEl?.value.trim();
-                const carNumber = carEl?.value.trim().toUpperCase(); // Standardize car number case
-                const startDate = startEl?.value;
-                const form = (type === 'admin') ? adminAddForm : registerForm;
-                const submitButton = form.querySelector('button[type="submit"]');
-
-                if (!phone || !/^\d{10}$/.test(phone)) { alert("Please enter a valid 10-digit phone number."); return; } // Validate phone
-                if (!carNumber) { alert("Please enter the car number."); return; }
-                if (!startDate) { alert("Please select a start date."); return; }
-
-                submitButton.textContent = 'Registering...'; submitButton.disabled = true;
-
-                try {
-                    const querySnapshot = await db.collection("cars")
-                        .where("id", "==", phone)
-                        .where("carNumber", "==", carNumber) // Case sensitive check now
-                        .limit(1)
-                        .get();
-                    if (!querySnapshot.empty) {
-                        alert('This car number is already registered for this phone number.');
-                        submitButton.textContent = type === 'admin' ? 'Add Customer Car' : 'Register This Car';
-                        submitButton.disabled = false;
-                        return;
-                    }
-
-                    const schedule = getScheduleFromForm(prefix);
-                    const newCustomer = createCustomerObject(phone, carNumber, startDate, schedule);
-
-                    await db.collection("cars").add(newCustomer);
-
-                    form.reset();
-                    setTodayDate(startEl);
-
-                    if (type === 'register') {
-                        alert('Car registered successfully! Please login.');
-                        loginTabBtn.click();
-                    } else {
-                        alert(`Car ${carNumber} added for ${phone}.`);
-                        await renderAdminDashboard();
-                    }
-                } catch (error) {
-                    console.error("Error checking/adding car:", error);
-                    alert("Failed to register car due to a database error. Please try again.");
-                } finally {
-                    submitButton.textContent = type === 'admin' ? 'Add Customer Car' : 'Register This Car';
-                    submitButton.disabled = false;
-                }
-            }
-
-            async function handleAdminToggle(e) {
-                const toggle = e.target;
-                if (!toggle.matches('.status-toggle, .payment-toggle')) return; // Exit if not a toggle
-
-                const firestoreDocId = toggle.dataset.firestoreId;
-                if (!firestoreDocId) { console.error("Firestore ID missing!"); return; }
-
-                const carDocRef = db.collection("cars").doc(firestoreDocId);
-                let updateData = {};
-                let labelElement = toggle.closest('label').nextElementSibling; // Find sibling label
-
-                // Determine original state before UI update (for potential revert)
-                const wasChecked = !toggle.checked;
-
-                try {
-                    toggle.disabled = true; // Disable toggle during update
-
-                    if (toggle.classList.contains('status-toggle')) {
-                        const day = toggle.dataset.day;
-                        const newStatus = toggle.checked ? 'Completed' : 'Pending';
-                        updateData[`status.${day}`] = newStatus;
-                        // Update label immediately
-                        labelElement.textContent = newStatus;
-                        labelElement.className = `status-label ${newStatus.toLowerCase()}`;
-                    }
-
-                    if (toggle.classList.contains('payment-toggle')) {
-                        const newStatus = toggle.checked ? 'Received' : 'Pending';
-                        updateData.paymentStatus = newStatus;
-                        // Update label immediately
-                        labelElement.textContent = newStatus;
-                        labelElement.className = `status-label ${newStatus === 'Received' ? 'completed' : 'pending'}`;
-                    }
-
-                    if (Object.keys(updateData).length > 0) {
-                        await carDocRef.update(updateData);
-                        console.log("Document successfully updated!");
-                    }
-
-                } catch (error) {
-                    console.error("Error updating document: ", error);
-                    alert("Failed to update status. Please try again.");
-                    // Revert UI on error
-                    toggle.checked = wasChecked; // Set back to original state
-                    if (toggle.classList.contains('status-toggle')) {
-                        const oldStatus = toggle.checked ? 'Completed' : 'Pending';
-                        labelElement.textContent = oldStatus;
-                        labelElement.className = `status-label ${oldStatus.toLowerCase()}`;
-                    }
-                    if (toggle.classList.contains('payment-toggle')) {
-                        const oldStatus = toggle.checked ? 'Received' : 'Pending';
-                        labelElement.textContent = oldStatus;
-                        labelElement.className = `status-label ${oldStatus === 'Received' ? 'completed' : 'pending'}`;
-                    }
-                } finally {
-                    toggle.disabled = false; // Re-enable toggle
-                }
-            }
-
-            function handleLogout() {
-                loggedInUser = null; showView('login'); updateNav(); loginForm.reset(); adminPasswordGroup.classList.add('hidden');
-            }
+            function handleLogout() { loggedInUser = null; allFetchedCars = []; /* Clear cache */ showView('login'); updateNav(); loginForm.reset(); adminPasswordGroup.classList.add('hidden'); }
 
             // --- INITIALIZATION & Event Listeners ---
             setTodayDate(adminStartDate); setTodayDate(registerStartDate);
-            loginPhone.addEventListener('input', () => { adminPasswordGroup.classList.toggle('hidden', loginPhone.value.toLowerCase() !== ADMIN_USER); if (loginPhone.value.toLowerCase() !== ADMIN_USER) loginPassword.value = ''; });
+            loginPhone.addEventListener('input', () => { adminPasswordGroup.classList.toggle('hidden', loginPhone.value.toLowerCase() !== ADMIN_USER); if(loginPhone.value.toLowerCase() !== ADMIN_USER) loginPassword.value=''; });
             loginTabBtn.addEventListener('click', () => { loginTabBtn.classList.add('active'); registerTabBtn.classList.remove('active'); loginForm.classList.remove('hidden'); registerForm.classList.add('hidden'); });
             registerTabBtn.addEventListener('click', () => { loginTabBtn.classList.remove('active'); registerTabBtn.classList.add('active'); loginForm.classList.add('hidden'); registerForm.classList.remove('hidden'); });
-            loginForm.addEventListener('submit', handleLogin); // handleLogin is now async
-            registerForm.addEventListener('submit', (e) => handleCarRegistration(e, 'register')); // Now async
-            adminAddForm.addEventListener('submit', (e) => handleCarRegistration(e, 'admin')); // Now async
-            searchBar.addEventListener('input', () => { if (loggedInUser === ADMIN_USER) renderAdminDashboard(); });
-            customerList.addEventListener('change', handleAdminToggle); // Now async
-            nav.logo.addEventListener('click', async (e) => {
-                e.preventDefault();
-                if (loggedInUser) {
-                    showView(loggedInUser === ADMIN_USER ? 'admin' : 'customer');
-                    if (loggedInUser === ADMIN_USER) await renderAdminDashboard(); else await renderCustomerDashboard();
-                } else { showView('login'); }
-            });
+            loginForm.addEventListener('submit', handleLogin); 
+            registerForm.addEventListener('submit', (e) => handleCarRegistration(e, 'register')); 
+            adminAddForm.addEventListener('submit', (e) => handleCarRegistration(e, 'admin')); 
+            searchBar.addEventListener('input', () => { if(loggedInUser === ADMIN_USER) renderAdminDashboard(); }); 
+            customerList.addEventListener('change', handleAdminToggle); 
+            customerList.addEventListener('click', handleDeleteCar); 
+            historySearchBar.addEventListener('input', () => { if(loggedInUser === ADMIN_USER) renderHistoryView(historySearchBar.value.trim()); }); 
+
+            // --- Navigation Event Listeners ---
+            nav.logo.addEventListener('click', async (e) => { 
+                 e.preventDefault(); 
+                 if (loggedInUser) { 
+                     showView(loggedInUser===ADMIN_USER ? 'admin' : 'customer'); 
+                     if(loggedInUser===ADMIN_USER) await renderAdminDashboard(); else await renderCustomerDashboard(); 
+                 } else { showView('login'); } 
+             });
             nav.login.addEventListener('click', () => showView('login'));
             nav.register.addEventListener('click', () => { showView('login'); registerTabBtn.click(); });
-            nav.dashboard.addEventListener('click', async () => {
-                if (loggedInUser) {
-                    showView(loggedInUser === ADMIN_USER ? 'admin' : 'customer');
-                    if (loggedInUser === ADMIN_USER) await renderAdminDashboard(); else await renderCustomerDashboard();
-                }
-            });
+            nav.dashboard.addEventListener('click', async () => { 
+                 if(loggedInUser) { 
+                     showView(loggedInUser===ADMIN_USER ? 'admin' : 'customer'); 
+                     if(loggedInUser===ADMIN_USER) await renderAdminDashboard(); else await renderCustomerDashboard(); 
+                 } 
+             });
+            nav.history.addEventListener('click', async () => { 
+                 if(loggedInUser) {
+                     historySearchBar.value = ''; // Clear search on view load
+                     showView('history'); 
+                     await renderHistoryView(); 
+                 }
+             });
             nav.about.addEventListener('click', () => showView('about'));
             nav.contact.addEventListener('click', () => showView('contact'));
             nav.logout.addEventListener('click', handleLogout);
 
-            showView('login'); updateNav(); // Initial setup: Show login, update nav
+            showView('login'); updateNav(); // Initial setup
         });
     </script>
 
 </body>
-
 </html>
